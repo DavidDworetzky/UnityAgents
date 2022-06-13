@@ -1,2 +1,2 @@
 # UnityAgents
-Public Example of Multi Agent Learning with Unity Agents
+Sample Repo of Unity ML Agents
