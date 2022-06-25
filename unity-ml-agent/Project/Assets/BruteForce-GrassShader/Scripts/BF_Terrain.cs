@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+
 [ExecuteInEditMode]
 public class BF_Terrain : MonoBehaviour
 {
@@ -107,6 +108,7 @@ public class BF_Terrain : MonoBehaviour
         if (terrainToCopy != null && terrainToCopy != terrainAsset)
         {
             isSynced = true;
+            Debug.Log(isSynced);
             terrainAsset.transform.position = terrainToCopy.transform.position + Vector3.up * 0.01f;
             grassTerrainMaterial.SetFloat("_GrassCut", 1);
 
