@@ -443,7 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 482746060}
-  movementIntensity: 1
+  movementIntensity: 10
 --- !u!1 &1376722851
 GameObject:
   m_ObjectHideFlags: 0
