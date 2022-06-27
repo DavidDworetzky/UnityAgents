@@ -32,10 +32,11 @@ public class BasicPlayerController : MonoBehaviour
     {
     	/* 
     	Establish some directions 
-    	based on the cameraTarget object's orientation 
+    	based on the player camera's orientation.
     	*/
-        var ForwardDirection = cameraTarget.transform.forward;
-        var RightDirection = cameraTarget.transform.right;
+        var playerCamera = GameObject.Find("Main Camera");
+        var ForwardDirection = playerCamera.transform.forward;
+        var RightDirection = playerCamera.transform.right;
 
         // Move Forwards
         if (Input.GetKey(KeyCode.W)) 
