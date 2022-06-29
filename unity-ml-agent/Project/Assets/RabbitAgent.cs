@@ -7,8 +7,7 @@ using Unity.MLAgents.Actuators;
 
 public class RabbitAgent : Agent
 {
-    //RigidBody reference
-    private RigidBody body;
+    private Rigidbody body;
 
     // Reference to original starting position
     private Vector3 startPosition;
@@ -23,7 +22,7 @@ public class RabbitAgent : Agent
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<RigidBody>();
+        body = GetComponent<Rigidbody>();
         startPosition = transform.position;
     }
 
