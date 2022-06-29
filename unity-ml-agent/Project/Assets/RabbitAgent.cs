@@ -83,4 +83,12 @@ public class RabbitAgent : Agent
             EndEpisode();
         }
     }
+
+    //keyboard controls for rabbit agent to override behavior.
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var continuousActionsOut = actionsOut.ContinuousActions;
+        continuousActionsOut[0] = Input.GetAxis("Horizontal");
+        continuousActionsOut[1] = Input.GetAxis("Vertical");
+    }
 }
