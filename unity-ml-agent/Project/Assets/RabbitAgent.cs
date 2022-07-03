@@ -7,6 +7,10 @@ using Unity.MLAgents.Actuators;
 
 public class RabbitAgent : Agent
 {
+    private readonly Vector3 spawnPosition = new Vector3(-24, MAP_ELEVATION, 29);
+    private readonly Vector3 carrotSpawnPosition = new Vector3(0, MAP_ELEVATION, 18);
+
+    private const float MAP_ELEVATION = 6f;
     private Rigidbody body;
 
     // Reference to original starting position
@@ -28,12 +32,12 @@ public class RabbitAgent : Agent
 
     private void ResetPosition()
     {
-        this.transform.localPosition = startPosition;
+        this.transform.localPosition = spawnPosition;
     }
 
     private void MoveTargetRandomPosition()
     {
-        Target.localPosition = new Vector3(Random.value * 8 - 4, 0.5f, Random.value * 8 - 4);
+        Target.localPosition = new Vector3(carrotSpawnPosition.x + (Random.value - 0.5f) * 12, MAP_ELEVATION, carrotSpawnPosition.z + (Random.value - 0.5f) * 18);
     }
 
     //Override for OnEpisodeBegin (training the agent.)
