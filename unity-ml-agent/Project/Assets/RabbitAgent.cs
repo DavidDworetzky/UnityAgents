@@ -7,7 +7,8 @@ using Unity.MLAgents.Actuators;
 
 public class RabbitAgent : Agent
 {
-    private readonly Vector3 spawnPosition = new Vector3(-24, MAP_ELEVATION, 29);
+    private const bool ResetActorOnEpisode = true;
+    private readonly Vector3 spawnPosition = new Vector3(0, MAP_ELEVATION, 15);
     private readonly Vector3 carrotSpawnPosition = new Vector3(0, MAP_ELEVATION, 18);
 
     private const float MAP_ELEVATION = 6f;
@@ -37,14 +38,14 @@ public class RabbitAgent : Agent
 
     private void MoveTargetRandomPosition()
     {
-        Target.localPosition = new Vector3(carrotSpawnPosition.x + (Random.value - 0.5f) * 12, MAP_ELEVATION, carrotSpawnPosition.z + (Random.value - 0.5f) * 18);
+        Target.localPosition = new Vector3(carrotSpawnPosition.x + (Random.value - 0.5f) * 6, MAP_ELEVATION, carrotSpawnPosition.z + (Random.value - 0.5f) * 9);
     }
 
     //Override for OnEpisodeBegin (training the agent.)
     public override void OnEpisodeBegin()
     {
         // reset the momentum if the agent falls
-        if (this.transform.localPosition.y < 0)
+        if (this.transform.localPosition.y < 0 || ResetActorOnEpisode)
         {
             this.body.angularVelocity = Vector3.zero;
             this.body.velocity = Vector3.zero;
@@ -84,6 +85,7 @@ public class RabbitAgent : Agent
         else if (this.transform.localPosition.y < 0)
         {
             // Fell off platform
+            SetReward(-0.5f);
             EndEpisode();
         }
     }
