@@ -11,6 +11,8 @@ public class RabbitAgent : Agent
     private readonly Vector3 spawnPosition = new Vector3(0, MAP_ELEVATION, 15);
     private readonly Vector3 carrotSpawnPosition = new Vector3(0, MAP_ELEVATION, 18);
 
+    private const float fallingFloor = -100f;
+
     private const float MAP_ELEVATION = 6f;
     private Rigidbody body;
 
@@ -45,7 +47,7 @@ public class RabbitAgent : Agent
     public override void OnEpisodeBegin()
     {
         // reset the momentum if the agent falls
-        if (this.transform.localPosition.y < 0 || ResetActorOnEpisode)
+        if (this.transform.localPosition.y < fallingFloor || ResetActorOnEpisode)
         {
             this.body.angularVelocity = Vector3.zero;
             this.body.velocity = Vector3.zero;
@@ -82,7 +84,7 @@ public class RabbitAgent : Agent
             SetReward(targetReward);
             EndEpisode();
         }
-        else if (this.transform.localPosition.y < 0)
+        else if (this.transform.localPosition.y < fallingFloor)
         {
             // Fell off platform
             SetReward(-0.5f);
@@ -91,12 +93,12 @@ public class RabbitAgent : Agent
     }
 
     //keyboard controls for rabbit agent to override behavior.
-    /*
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
-        var continuousActionsOut = actionsOut.ContinuousActions;
-        continuousActionsOut[0] = Input.GetAxis("Horizontal");
-        continuousActionsOut[1] = Input.GetAxis("Vertical");
-    }
-    */
+    
+    // public override void Heuristic(in ActionBuffers actionsOut)
+    // {
+    //     var continuousActionsOut = actionsOut.ContinuousActions;
+    //     continuousActionsOut[0] = Input.GetAxis("Horizontal");
+    //     continuousActionsOut[1] = Input.GetAxis("Vertical");
+    // }
+    
 }
