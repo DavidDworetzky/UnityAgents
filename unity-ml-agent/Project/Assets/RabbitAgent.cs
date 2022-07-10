@@ -12,9 +12,12 @@ public class RabbitAgent : Agent
     private readonly Vector3 carrotSpawnPosition = new Vector3(0, MAP_ELEVATION, 18);
 
     private const float fallingFloor = -100f;
+    private const string lakeName = "Lake";
 
     private const float MAP_ELEVATION = 6f;
     private Rigidbody body;
+
+    private bool isCollidedWater = false;
 
     // Reference to original starting position
     private Vector3 startPosition;
@@ -90,15 +93,29 @@ public class RabbitAgent : Agent
             SetReward(-0.5f);
             EndEpisode();
         }
+        else if (isCollidedWater)
+        {
+            isCollidedWater = false;
+            SetReward(-0.5f);
+            EndEpisode();
+        }
+    }
+
+    void OnCollisionEnter(Collision hit)
+    {
+        if (hit.transform.gameObject.name.Contains(lakeName))
+        {
+            isCollidedWater = true;
+        }
     }
 
     //keyboard controls for rabbit agent to override behavior.
     
-    // public override void Heuristic(in ActionBuffers actionsOut)
-    // {
-    //     var continuousActionsOut = actionsOut.ContinuousActions;
-    //     continuousActionsOut[0] = Input.GetAxis("Horizontal");
-    //     continuousActionsOut[1] = Input.GetAxis("Vertical");
-    // }
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var continuousActionsOut = actionsOut.ContinuousActions;
+        continuousActionsOut[0] = Input.GetAxis("Horizontal");
+        continuousActionsOut[1] = Input.GetAxis("Vertical");
+    }
     
 }
