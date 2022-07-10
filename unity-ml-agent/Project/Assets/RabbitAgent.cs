@@ -42,6 +42,7 @@ public class RabbitAgent : Agent
         body = GetComponent<Rigidbody>();
         startPosition = transform.position;
         TideObjects = GameObject.FindGameObjectsWithTag("Tide");
+        InvokeRepeating("IncrementTide", 1.0f, 1.0f);
     }
 
     private void ResetPosition()
@@ -83,7 +84,6 @@ public class RabbitAgent : Agent
         //tide is reset to start.
         tideCounter = 0;
         ToggleTideObjects(false);
-        InvokeRepeating("IncrementTide", 1.0f, 1.0f);
         // reset the momentum if the agent falls
         if (this.transform.localPosition.y < fallingFloor || ResetActorOnEpisode)
         {
