@@ -14,7 +14,7 @@ public class RabbitAgent : Agent
     private const float fallingFloor = -100f;
     private const string lakeName = "Lake";
 
-    private const int tideDelay = 5;
+    private const int tideDelay = 20;
 
     private const float MAP_ELEVATION = 6f;
     private Rigidbody body;
@@ -32,12 +32,16 @@ public class RabbitAgent : Agent
     public float targetReward = 1;
 
     private int tideCounter = 0;
+    private bool tideToggled = false;
+
+    private GameObject[] TideObjects;
 
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody>();
         startPosition = transform.position;
+        TideObjects = GameObject.FindGameObjectsWithTag("Tide");
     }
 
     private void ResetPosition()
@@ -52,8 +56,9 @@ public class RabbitAgent : Agent
 
     private void ToggleTideObjects(bool toggle)
     {
+        tideToggled = toggle;
         Debug.Log($"Toggling tide objects active to: {toggle}");
-        var objects = GameObject.FindGameObjectsWithTag("Tide");
+        var objects = TideObjects;
         foreach (var t in objects)
         {
             t.SetActive(toggle);
@@ -65,7 +70,9 @@ public class RabbitAgent : Agent
         tideCounter++;
         if(tideCounter > tideDelay)
         {
-            ToggleTideObjects(true);
+            //tide comes in, and comes out.
+            tideCounter = 0;
+            ToggleTideObjects(!tideToggled);
         }
         Debug.Log($"tide counter: {tideCounter}");
     }
@@ -73,6 +80,7 @@ public class RabbitAgent : Agent
     //Override for OnEpisodeBegin (training the agent.)
     public override void OnEpisodeBegin()
     {
+        //tide is reset to start.
         tideCounter = 0;
         ToggleTideObjects(false);
         InvokeRepeating("IncrementTide", 1.0f, 1.0f);
