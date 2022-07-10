@@ -336,54 +336,54 @@ namespace StylizedWater2
             return;
 			#endif
 			
-            //Only run for specific shaders
-            if (TargetShaders.Contains(shader) == false) return;
+            ////Only run for specific shaders
+            //if (TargetShaders.Contains(shader) == false) return;
 
-            LogStart(shader, snippet, compilerDataList);
+            //LogStart(shader, snippet, compilerDataList);
             
-            var inputShaderVariantCount = compilerDataList.Count;
-            for (int i = 0; i < inputShaderVariantCount;)
-            {
-                //If any of the excluded keywords are enabled in this variant, strip it
-                bool removeInput = StripUnused(shader, compilerDataList[i], snippet);
+            //var inputShaderVariantCount = compilerDataList.Count;
+            //for (int i = 0; i < inputShaderVariantCount;)
+            //{
+            //    //If any of the excluded keywords are enabled in this variant, strip it
+            //    bool removeInput = StripUnused(shader, compilerDataList[i], snippet);
                 
-                // Remove at swap back
-                if (removeInput)
-                    compilerDataList[i] = compilerDataList[--inputShaderVariantCount];
-                else
-                    ++i;
-            }
+            //    // Remove at swap back
+            //    if (removeInput)
+            //        compilerDataList[i] = compilerDataList[--inputShaderVariantCount];
+            //    else
+            //        ++i;
+            //}
             
-            if (compilerDataList is List<ShaderCompilerData> inputDataList)
-            {
-                inputDataList.RemoveRange(inputShaderVariantCount, inputDataList.Count - inputShaderVariantCount);
-            }
-            else
-            {
-                for(int i = compilerDataList.Count -1; i >= inputShaderVariantCount; --i)
-                    compilerDataList.RemoveAt(i);
-            }
+            //if (compilerDataList is List<ShaderCompilerData> inputDataList)
+            //{
+            //    inputDataList.RemoveRange(inputShaderVariantCount, inputDataList.Count - inputShaderVariantCount);
+            //}
+            //else
+            //{
+            //    for(int i = compilerDataList.Count -1; i >= inputShaderVariantCount; --i)
+            //        compilerDataList.RemoveAt(i);
+            //}
 
-            /* Old version, potentially caused a build error for some users
-            for (int i = 0; i < compilerDataList.Count; ++i)
-            {
-                if(isInstalledUnderwater == false) StripKeyword(shader, UNDERWATER_ENABLED, ref compilerDataList, ref i, snippet);
-                if(isInstalledSurfaceModifiers == false) StripKeyword(shader, MODIFIERS_ENABLED, ref compilerDataList, ref i, snippet);
+            ///* Old version, potentially caused a build error for some users
+            //for (int i = 0; i < compilerDataList.Count; ++i)
+            //{
+            //    if(isInstalledUnderwater == false) StripKeyword(shader, UNDERWATER_ENABLED, ref compilerDataList, ref i, snippet);
+            //    if(isInstalledSurfaceModifiers == false) StripKeyword(shader, MODIFIERS_ENABLED, ref compilerDataList, ref i, snippet);
                 
-                #if !URP_10_0_OR_NEWER
-                StripKeyword(shader, _ADDITIONAL_LIGHT_SHADOWS, ref compilerDataList, ref i, snippet);
-                #endif
+            //    #if !URP_10_0_OR_NEWER
+            //    StripKeyword(shader, _ADDITIONAL_LIGHT_SHADOWS, ref compilerDataList, ref i, snippet);
+            //    #endif
                 
-                #if !URP_12_0_OR_NEWER
-                StripKeyword(shader, _REFLECTION_PROBE_BLENDING, ref compilerDataList, ref i, snippet);
-                StripKeyword(shader, _REFLECTION_PROBE_BOX_PROJECTION, ref compilerDataList, ref i, snippet);
-                StripKeyword(shader, DYNAMICLIGHTMAP_ON, ref compilerDataList, ref i, snippet);
-                StripKeyword(shader, DEBUG_DISPLAY, ref compilerDataList, ref i, snippet);
-                #endif
-            }
-            */
+            //    #if !URP_12_0_OR_NEWER
+            //    StripKeyword(shader, _REFLECTION_PROBE_BLENDING, ref compilerDataList, ref i, snippet);
+            //    StripKeyword(shader, _REFLECTION_PROBE_BOX_PROJECTION, ref compilerDataList, ref i, snippet);
+            //    StripKeyword(shader, DYNAMICLIGHTMAP_ON, ref compilerDataList, ref i, snippet);
+            //    StripKeyword(shader, DEBUG_DISPLAY, ref compilerDataList, ref i, snippet);
+            //    #endif
+            //}
+            //*/
 
-            LogStrippingEnd(compilerDataList.Count);
+            //LogStrippingEnd(compilerDataList.Count);
         }
 
         
