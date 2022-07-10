@@ -4032,7 +4032,7 @@ GameObject:
   - component: {fileID: 573823060}
   m_Layer: 0
   m_Name: High Tide Lake 6
-  m_TagString: Untagged
+  m_TagString: Tide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5172,7 +5172,7 @@ GameObject:
   - component: {fileID: 723984086}
   m_Layer: 0
   m_Name: High Tide Lake 4
-  m_TagString: Untagged
+  m_TagString: Tide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6726,7 +6726,7 @@ GameObject:
   - component: {fileID: 912025022}
   m_Layer: 0
   m_Name: High Tide Lake 2
-  m_TagString: Untagged
+  m_TagString: Tide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8341,7 +8341,7 @@ GameObject:
   - component: {fileID: 1174165151}
   m_Layer: 0
   m_Name: High Tide Lake 7
-  m_TagString: Untagged
+  m_TagString: Tide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10811,7 +10811,7 @@ GameObject:
   - component: {fileID: 1504171894}
   m_Layer: 0
   m_Name: High Tide Lake 3
-  m_TagString: Untagged
+  m_TagString: Tide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12717,7 +12717,7 @@ GameObject:
   - component: {fileID: 1751319625}
   m_Layer: 0
   m_Name: High Tide Lake
-  m_TagString: Untagged
+  m_TagString: Tide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14237,7 +14237,7 @@ GameObject:
   - component: {fileID: 1944031481}
   m_Layer: 0
   m_Name: High Tide Lake 5
-  m_TagString: Untagged
+  m_TagString: Tide
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

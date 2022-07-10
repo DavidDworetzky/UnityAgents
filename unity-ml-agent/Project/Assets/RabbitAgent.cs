@@ -14,6 +14,8 @@ public class RabbitAgent : Agent
     private const float fallingFloor = -100f;
     private const string lakeName = "Lake";
 
+    private const int tideDelay = 5;
+
     private const float MAP_ELEVATION = 6f;
     private Rigidbody body;
 
@@ -28,6 +30,8 @@ public class RabbitAgent : Agent
     public float forceMultiplier = 10;
 
     public float targetReward = 1;
+
+    private int tideCounter = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -46,9 +50,32 @@ public class RabbitAgent : Agent
         Target.localPosition = new Vector3(carrotSpawnPosition.x + (Random.value - 0.5f) * 6, MAP_ELEVATION, carrotSpawnPosition.z + (Random.value - 0.5f) * 9);
     }
 
+    private void ToggleTideObjects(bool toggle)
+    {
+        Debug.Log($"Toggling tide objects active to: {toggle}");
+        var objects = GameObject.FindGameObjectsWithTag("Tide");
+        foreach (var t in objects)
+        {
+            t.SetActive(toggle);
+        }
+    }
+
+    void IncrementTide()
+    {
+        tideCounter++;
+        if(tideCounter > tideDelay)
+        {
+            ToggleTideObjects(true);
+        }
+        Debug.Log($"tide counter: {tideCounter}");
+    }
+
     //Override for OnEpisodeBegin (training the agent.)
     public override void OnEpisodeBegin()
     {
+        tideCounter = 0;
+        ToggleTideObjects(false);
+        InvokeRepeating("IncrementTide", 1.0f, 1.0f);
         // reset the momentum if the agent falls
         if (this.transform.localPosition.y < fallingFloor || ResetActorOnEpisode)
         {
