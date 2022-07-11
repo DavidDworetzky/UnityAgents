@@ -104,18 +104,21 @@ public class RabbitAgent : Agent
     //Override for OnEpisodeBegin (training the agent.)
     public override void OnEpisodeBegin()
     {
-        //tide is reset to start.
-        tideCounter = 0;
-        ToggleTideObjects(false);
-        // reset the momentum if the agent falls
-        if (this.transform.localPosition.y < fallingFloor || ResetActorOnEpisode)
+        if (IsPrimaryAgent)
         {
-            this.body.angularVelocity = Vector3.zero;
-            this.body.velocity = Vector3.zero;
-            this.ResetPosition();
+            //tide is reset to start.
+            tideCounter = 0;
+            ToggleTideObjects(false);
+            // reset the momentum if the agent falls
+            if (this.transform.localPosition.y < fallingFloor || ResetActorOnEpisode)
+            {
+                this.body.angularVelocity = Vector3.zero;
+                this.body.velocity = Vector3.zero;
+                this.ResetPosition();
+            }
+            this.MoveTargetRandomPosition();
+            this.MoveWolfRandomPosition();
         }
-        this.MoveTargetRandomPosition();
-        this.MoveWolfRandomPosition();
     }
 
     public override void CollectObservations(VectorSensor sensor)
