@@ -9,7 +9,8 @@ public class RabbitAgent : Agent
 {
     private const bool ResetActorOnEpisode = true;
     private readonly Vector3 spawnPosition = new Vector3(0, MAP_ELEVATION, 15);
-    private readonly Vector3 carrotSpawnPosition = new Vector3(0, MAP_ELEVATION, 18);
+    private readonly Vector3 carrotSpawnPosition = new Vector3(0, MAP_ELEVATION - 5, -20);
+    private readonly Vector3 wolfSpawnPosition = new Vector3(0, MAP_ELEVATION - 10, -50);
 
     private const float fallingFloor = -100f;
     private const string lakeName = "Lake";
@@ -27,6 +28,20 @@ public class RabbitAgent : Agent
     //Orientation of RabbitAgent
     public Transform Target;
 
+    public GameObject Avoid1;
+
+    public GameObject Avoid2;
+
+    public Transform Wolf;
+
+    public bool Avoid1TriggersEnd;
+
+    public bool Avoid2TriggersEnd;
+
+    //Public setting determing if we are the primary agent (scene agent to trigger scene behaviors)
+
+    public bool IsPrimaryAgent;
+
     public float forceMultiplier = 10;
 
     public float targetReward = 1;
@@ -41,8 +56,11 @@ public class RabbitAgent : Agent
     {
         body = GetComponent<Rigidbody>();
         startPosition = transform.position;
-        TideObjects = GameObject.FindGameObjectsWithTag("Tide");
-        InvokeRepeating("IncrementTide", 1.0f, 1.0f);
+        if (IsPrimaryAgent)
+        {
+            TideObjects = GameObject.FindGameObjectsWithTag("Tide");
+            InvokeRepeating("IncrementTide", 1.0f, 1.0f);
+        }
     }
 
     private void ResetPosition()
@@ -53,6 +71,11 @@ public class RabbitAgent : Agent
     private void MoveTargetRandomPosition()
     {
         Target.localPosition = new Vector3(carrotSpawnPosition.x + (Random.value - 0.5f) * 6, MAP_ELEVATION, carrotSpawnPosition.z + (Random.value - 0.5f) * 9);
+    }
+
+    private void MoveWolfRandomPosition()
+    {
+        Wolf.localPosition = new Vector3(wolfSpawnPosition.x + (Random.value - 0.5f) * 6, MAP_ELEVATION - 5, wolfSpawnPosition.z + (Random.value - 0.5f) * 9 );
     }
 
     private void ToggleTideObjects(bool toggle)
@@ -92,6 +115,7 @@ public class RabbitAgent : Agent
             this.ResetPosition();
         }
         this.MoveTargetRandomPosition();
+        this.MoveWolfRandomPosition();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -103,6 +127,10 @@ public class RabbitAgent : Agent
         //agent velocity
         sensor.AddObservation(this.body.velocity.x);
         sensor.AddObservation(this.body.velocity.z);
+
+        //avoid 1 and 2 positions
+        sensor.AddObservation(Avoid1.transform.localPosition);
+        sensor.AddObservation(Avoid2.transform.localPosition);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
@@ -115,24 +143,41 @@ public class RabbitAgent : Agent
 
         // Rewards
         float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
+        float distanceToAvoid1 = Vector3.Distance(this.transform.localPosition, Avoid1.transform.localPosition);
+        float distancetoAvoid2 = Vector3.Distance(this.transform.localPosition, Avoid2.transform.localPosition);
 
-        // Reached target
-        if (distanceToTarget < 1.42f)
+
+        //update reward functions and end the episode if we are the primary agent.
+        if (IsPrimaryAgent)
         {
-            SetReward(targetReward);
-            EndEpisode();
-        }
-        else if (this.transform.localPosition.y < fallingFloor)
-        {
-            // Fell off platform
-            SetReward(-0.5f);
-            EndEpisode();
-        }
-        else if (isCollidedWater)
-        {
-            isCollidedWater = false;
-            SetReward(-0.5f);
-            EndEpisode();
+            // Reached target
+            if (distanceToTarget < 1.42f)
+            {
+                SetReward(targetReward);
+                EndEpisode();
+            }
+            else if (this.transform.localPosition.y < fallingFloor)
+            {
+                // Fell off platform
+                SetReward(-0.5f);
+                EndEpisode();
+            }
+            else if (isCollidedWater)
+            {
+                isCollidedWater = false;
+                SetReward(-0.5f);
+                EndEpisode();
+            }
+            else if (distanceToAvoid1 < 1.42f && Avoid1TriggersEnd)
+            {
+                SetReward(-0.5f);
+                EndEpisode();
+            }
+            else if (distancetoAvoid2 < 1.42f && Avoid2TriggersEnd)
+            {
+                SetReward(-0.5f);
+                EndEpisode();
+            }
         }
     }
 
