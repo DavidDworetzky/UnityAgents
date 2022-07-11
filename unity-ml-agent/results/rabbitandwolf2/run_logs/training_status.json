@@ -1,0 +1,29 @@
+{
+    "RabbitBehavior": {
+        "checkpoints": [
+            {
+                "steps": 10688,
+                "file_path": "results\\rabbitandwolf2\\RabbitBehavior\\RabbitBehavior-10688.onnx",
+                "reward": null,
+                "creation_time": 1657509833.5868602,
+                "auxillary_file_paths": [
+                    "results\\rabbitandwolf2\\RabbitBehavior\\RabbitBehavior-10688.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 10688,
+            "file_path": "results\\rabbitandwolf2\\RabbitBehavior.onnx",
+            "reward": null,
+            "creation_time": 1657509833.5868602,
+            "auxillary_file_paths": [
+                "results\\rabbitandwolf2\\RabbitBehavior\\RabbitBehavior-10688.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

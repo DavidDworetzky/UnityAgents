@@ -9,7 +9,7 @@ public class RabbitAgent : Agent
 {
     private const bool ResetActorOnEpisode = true;
     private readonly Vector3 spawnPosition = new Vector3(0, MAP_ELEVATION, 15);
-    private readonly Vector3 carrotSpawnPosition = new Vector3(0, MAP_ELEVATION - 5, -20);
+    private readonly Vector3 carrotSpawnPosition = new Vector3(0, MAP_ELEVATION, 18);
     private readonly Vector3 wolfSpawnPosition = new Vector3(0, MAP_ELEVATION - 10, -50);
 
     private const float fallingFloor = -100f;
@@ -171,12 +171,12 @@ public class RabbitAgent : Agent
                 SetReward(-0.5f);
                 EndEpisode();
             }
-            else if (distanceToAvoid1 < 1.42f && Avoid1TriggersEnd)
+            else if (distanceToAvoid1 < 2.0f && Avoid1TriggersEnd)
             {
                 SetReward(-0.5f);
                 EndEpisode();
             }
-            else if (distancetoAvoid2 < 1.42f && Avoid2TriggersEnd)
+            else if (distancetoAvoid2 < 2.0f && Avoid2TriggersEnd)
             {
                 SetReward(-0.5f);
                 EndEpisode();

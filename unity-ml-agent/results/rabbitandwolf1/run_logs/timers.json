@@ -1,0 +1,49 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1657509591",
+        "python_version": "3.9.9 (tags/v3.9.9:ccb0e6a, Nov 15 2021, 18:08:50) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\djdwo\\AppData\\Roaming\\Python\\Python39\\site-packages\\mlagents\\trainers\\learn.py config/rabbits/rabbits_config.yaml --run-id=rabbitandwolf1",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.23.0",
+        "end_time_seconds": "1657509617"
+    },
+    "total": 26.003444799999997,
+    "count": 1,
+    "self": 0.0110906999999969,
+    "children": {
+        "run_training.setup": {
+            "total": 0.14834960000000041,
+            "count": 1,
+            "self": 0.14834960000000041
+        },
+        "TrainerController.start_learning": {
+            "total": 25.8440045,
+            "count": 1,
+            "self": 0.00018349999999855982,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 23.212813,
+                    "count": 1,
+                    "self": 23.212813
+                },
+                "TrainerController._save_models": {
+                    "total": 2.6310080000000013,
+                    "count": 1,
+                    "self": 0.0014830000000038979,
+                    "children": {
+                        "RLTrainer._checkpoint": {
+                            "total": 2.6295249999999974,
+                            "count": 1,
+                            "self": 2.6295249999999974
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

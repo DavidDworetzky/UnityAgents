@@ -509,9 +509,9 @@ MonoBehaviour:
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 0}
-  m_InferenceDevice: 0
+  m_InferenceDevice: 1
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: RabbitBehavior
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -1842,7 +1842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190310268}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.1, y: 0.3, z: -21.6}
+  m_LocalPosition: {x: -1.1, y: 7.9, z: 17.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1985270316}
@@ -6021,14 +6021,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802958127}
-  m_LocalRotation: {x: -0, y: -0.80031806, z: -0, w: 0.59957564}
-  m_LocalPosition: {x: -51.82, y: 6.09, z: -24.44}
+  m_LocalRotation: {x: -0, y: 0.47892803, z: -0, w: 0.8778542}
+  m_LocalPosition: {x: -24.4, y: 9.5, z: 9.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1376722854}
   m_Father: {fileID: 1985270316}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -106.321, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 57.231, z: 0}
 --- !u!54 &802958132
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9841,13 +9841,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1376722851}
-  m_LocalRotation: {x: -0, y: -0.71656984, z: -0, w: 0.69751537}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: -0, y: -0.9970568, z: -0, w: -0.0766672}
+  m_LocalPosition: {x: -0.0000018304871, y: 1, z: 0.00000053599933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 802958131}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -91.544, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -188.794, z: 0}
 --- !u!114 &1376722855
 MonoBehaviour:
   m_ObjectHideFlags: 0
